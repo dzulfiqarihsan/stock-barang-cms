@@ -1,0 +1,48 @@
+import { type NextPageWithLayout } from "@/layouts";
+import { AuthenticatedLayout } from "@/layouts/AuthenticatedLayout";
+import { ActionIcon, Container, Paper, Text } from "@mantine/core";
+import { IconPlus } from "@tabler/icons-react";
+import { useRouter } from "next/router";
+
+const mainContainer = {
+  h: 50,
+  mt: "md",
+  pt: 100,
+  px: 50,
+};
+
+const tablePaper = {
+  pt: 50,
+};
+
+export const Page: NextPageWithLayout = () => {
+  const router = useRouter();
+  const handleClick = (to: string) => {
+    void router.push(to);
+  };
+
+  return (
+    <>
+      <Container fluid {...mainContainer}>
+        <Text size="lg" fw={600}>
+          Tambah Nama Barang
+          <ActionIcon
+            onClick={() => handleClick("/cms/master/barang/tambahnamabarang")}
+            ml={10}
+            variant="filled"
+            aria-label="Settings"
+          >
+            <IconPlus style={{ width: "70%", height: "70%" }} stroke={1.5} />
+          </ActionIcon>
+        </Text>
+        <Paper {...tablePaper} shadow="xs" p="xl">
+          <Text>Tabel Nama Barang</Text>
+        </Paper>
+      </Container>
+    </>
+  );
+};
+
+Page.getLayout = AuthenticatedLayout;
+
+export default Page;
